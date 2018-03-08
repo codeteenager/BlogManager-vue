@@ -1,15 +1,23 @@
 <template>
-  <div id="app">
+  <div id="app" style="height:100%">
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'blog-manager'
-  }
+
+
+export default {
+  name: "blog-manager",
+  
+};
 </script>
 
 <style>
-  /* CSS */
+/* CSS */
+html,
+body {
+  margin: 0px;
+  padding: 0px;
+}
 </style>
