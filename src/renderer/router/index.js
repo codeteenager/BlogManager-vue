@@ -10,8 +10,9 @@ export default new Router({
       component: require('@/components/NewPage').default
     },
     {
-      path: '/',
-      component: require('@/components/Main').default
-    }
+      path: '/main',
+      component: require('@/components/Main').default,
+    },
+    { path: '/', redirect: '/main' },
   ]
 })

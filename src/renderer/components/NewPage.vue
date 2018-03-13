@@ -1,6 +1,6 @@
 <template>
-<el-container>
-<el-form ref="form" :model="form" label-width="100px">
+<el-container style="height:100%;display:flex;flex-direction:column;justify-content:center">
+<el-form ref="form" :model="form" label-width="100px" style="margin-top:100px;padding:10px">
   <el-form-item label="文章名称：">
     <el-input v-model="articleName"></el-input>
   </el-form-item>
@@ -25,22 +25,22 @@ export default {
   methods: {
     onSubmit() {
       let articleName = this.articleName;
-      this.$emit('test', 'hi')
-      // exec(
-      //   'hexo new "'+articleName+'"',
-      //   { cwd: "/Users/jiangshuaijie/Desktop/blog/" },
-      //   (error, stdout, stderr) => {
-      //     if (error) {
-      //       console.error(`exec error: ${error}`);
-      //       return;
-      //     }
-      //     ipcRenderer.send("MainMsgFromNewPage", "cancel");
-      //   }
-      // );
+      exec(
+        'hexo new "'+articleName+'"',
+        { cwd: "/Users/jiangshuaijie/Desktop/blog/" },
+        (error, stdout, stderr) => {
+          if (error) {
+            console.error(`exec error: ${error}`);
+            return;
+          }
+          ipcRenderer.send("MainMsgFromNewPage", "cancel");
+          ipcRenderer.send('MainMsgFromNewPage', 'updateArticle');
+        }
+      );
     },
     onCancel() {
       ipcRenderer.send("MainMsgFromNewPage", "cancel");
-    }
+    },
   }
 };
 </script>
