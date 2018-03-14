@@ -71,8 +71,8 @@
 <script>
 import { ipcRenderer } from "electron";
 var fs = require("fs");
-var path = '';
-const remote = require('electron').remote;
+var path = "";
+const remote = require("electron").remote;
 const Menu = remote.Menu;
 const MenuItem = remote.MenuItem;
 
@@ -89,7 +89,7 @@ export default {
       formLabelWidth: "120px",
       dialogFormVisible: false,
       deleteDialog: false,
-      deleteTitle: '',
+      deleteTitle: "",
       form: {
         path: ""
       }
@@ -110,7 +110,21 @@ export default {
         _this.articleMenu = files;
       });
     });
-    
+    ipcRenderer.on("save", (event, message) => {
+      if (_this.editableContents[_this.editableTabsValue] !== null) {
+        fs.writeFile(
+          path + "/" + _this.editableContents[_this.editableTabsValue].title,
+          _this.content,
+          err => {
+            if (err) throw err;
+            _this.$message({
+              message: '保存成功',
+              type: 'success'
+            });
+          }
+        );
+      }
+    });
   },
   methods: {
     update: _.debounce(function(e) {
@@ -119,29 +133,38 @@ export default {
     showMenu: function(title) {
       this.deleteTitle = title;
       let _this = this;
-      let menu = new Menu();//new一个菜单
-      //添加菜单功能  
-      menu.append(new MenuItem({ 
-        label: '删除', 
-        click: function() {
-          _this.deleteDialog = true
-        } 
-        }));
-      //添加菜单分割线  
-      menu.append(new MenuItem({ type: 'separator' }));
-      //添加菜单功能  
-      menu.append(new MenuItem({ label: 'MenuItem2', type: 'checkbox', checked: true ,click:function(){}}));
+      let menu = new Menu(); //new一个菜单
+      //添加菜单功能
+      menu.append(
+        new MenuItem({
+          label: "删除",
+          click: function() {
+            _this.deleteDialog = true;
+          }
+        })
+      );
+      //添加菜单分割线
+      menu.append(new MenuItem({ type: "separator" }));
+      //添加菜单功能
+      menu.append(
+        new MenuItem({
+          label: "MenuItem2",
+          type: "checkbox",
+          checked: true,
+          click: function() {}
+        })
+      );
       menu.popup(remote.getCurrentWindow());
     },
-    deleteArticle(){
+    deleteArticle() {
       this.deleteDialog = false;
       let _this = this;
-      let tip = '删除'+this.deleteTitle+'成功';
-      fs.unlink(path+"/"+this.deleteTitle,function(err){
+      let tip = "删除" + this.deleteTitle + "成功";
+      fs.unlink(path + "/" + this.deleteTitle, function(err) {
         if (err) throw err;
         _this.$message({
           message: tip,
-          type: 'success'
+          type: "success"
         });
         fs.readdir(path, function(err, files) {
           _this.articleMenu = files;
@@ -169,7 +192,6 @@ export default {
       this.content = this.editableContents[this.editableTabsValue].content;
     },
     removeTab(targetName) {
-      alert(this.editableContents[targetName].title);
       let tabs = this.editableTabs;
       let activeName = this.editableTabsValue;
       if (activeName === targetName) {

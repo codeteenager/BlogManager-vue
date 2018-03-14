@@ -97,10 +97,17 @@ const template = [
     label: '文件',
     submenu: [
       {
-        label: '新建文章',
+        label: '新建',
         accelerator: 'Shift+CmdOrCtrl+N',
         click() {
           newPageWindow.show();
+        }
+      },
+      {
+        label: '保存',
+        accelerator: 'Shift+CmdOrCtrl+S',
+        click() {
+          mainWindow.webContents.send('save');
         }
       },
       {
