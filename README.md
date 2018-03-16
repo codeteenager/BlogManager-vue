@@ -1,22 +1,11 @@
-# blog-manager
+> 为hexo博客生成器写的基于electron、vue.js框架搭建的博客管理器
 
-> hexo的博客生成器
+### 设置根目录
+![](https://ws4.sinaimg.cn/large/006tNc79gy1fpeu9cs37sj31jm0wqdrp.jpg)
 
-#### Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:9080
-npm run dev
-
-# build electron application for production
-npm run build
-
-
-```
-
----
-
-This project was generated with [electron-vue](https://github.com/SimulatedGREG/electron-vue)@[1c165f7](https://github.com/SimulatedGREG/electron-vue/tree/1c165f7c5e56edaf48be0fbb70838a1af26bb015) using [vue-cli](https://github.com/vuejs/vue-cli). Documentation about the original structure can be found [here](https://simulatedgreg.gitbooks.io/electron-vue/content/index.html).
+### 新建文章
+![](https://ws4.sinaimg.cn/large/006tNc79gy1fpeu7m5dbuj30gy07igoi.jpg)
+### 编辑文章
+![](https://ws4.sinaimg.cn/large/006tNc79gy1fpeu8ix2ksj31jm0wkqja.jpg)
+### 删除文章
+![](https://ws2.sinaimg.cn/large/006tNc79gy1fpeua0s2pbj31jk0wiwv6.jpg)
